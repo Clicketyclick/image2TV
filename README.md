@@ -43,42 +43,39 @@ Meta data is:
 
 Tag|Default|Description
 ---|---|---
-	`@brief`				| `Image convertion to TV format`	|
-	`@version`				| 2024-01-31 10|24|52				|
- 
-	`verbose`				| 0									| Mute
-	`flag_dir`				| `flags/`							| Source dir for flags (xxx.png)
-	`source_path`			| `./images/`						| Source dir for images
-	`source_pattern`		| `.jpg`							| File pattern for source files
-	`target_path`			| `./TV/`							| Target root dir
-	`output_extention`		| `png`								| Output extentions
-	`output_type`			| `jpg`								| Output file type
-	`flag_unknown`			| `Nuvola_unknown_flag`				| Flag to display on missing IPTC:countrycode or unknown country
-	`max_height`			| 2160								| Max canvas height
-	`max_width`				| 3840								| Max canvas width
-	`background_color`		| `black`							| Background color
-
- 
-				|
-	`boxwidth`				| 600								| Box width for meta data
-				|
-	`headline_start_vpos`	| 5									| Headline offset from top
-	`headline_font_size`	| 50								| Font size for headline
-	`headline_font_color`	| `yellow`							| Font color for headline
-				|
-	`caption_start_vpos`	| 40								| Caption  offset from top
-	`caption_font_size`		| 45								| Font size for caption
-	`caption_font_color`	| `white`							| Font color for caption
-	|
-	`location_start_vpos`	| 80								| Location  offset from top
-	`location_font_size`	| 30								| Font size for location
-	`location_font_color`	| `cyan`							| Font color for location
-	|
-	`flag_offset_x`			| 3700								| Offset for flag
-	`flag_offset_y`			| 2000								| Offset for flag
-|
-	`image_offset_x`		| 0									| Start offset for image
-	`image_offset_y`		| 0									| Start offset for image
+`@brief`				| `Image convertion to TV format`	|
+ `@version`				| 2024-01-31 10|24|52				|
+`verbose`				| 0									| Mute
+`flag_dir`				| `flags/`							| Source dir for flags (xxx.png)
+`source_path`			| `./images/`						| Source dir for images
+`source_pattern`		| `.jpg`							| File pattern for source files
+`target_path`			| `./TV/`							| Target root dir
+`output_extention`		| `png`								| Output extentions
+`output_type`			| `jpg`								| Output file type
+`flag_unknown`			| `Nuvola_unknown_flag`				| Flag to display on missing IPTC:countrycode or unknown country
+`max_height`			| 2160								| Max canvas height
+`max_width`				| 3840								| Max canvas width
+`background_color`		| `black`							| Background color
+||
+`boxwidth`				| 600								| Box width for meta data
+||
+`headline_start_vpos`	| 5									| Headline offset from top
+`headline_font_size`	| 50								| Font size for headline
+`headline_font_color`	| `yellow`							| Font color for headline
+||
+`caption_start_vpos`	| 40								| Caption  offset from top
+`caption_font_size`		| 45								| Font size for caption
+`caption_font_color`	| `white`							| Font color for caption
+||
+`location_start_vpos`	| 80								| Location  offset from top
+`location_font_size`	| 30								| Font size for location
+`location_font_color`	| `cyan`							| Font color for location
+||
+`flag_offset_x`			| 3700								| Offset for flag
+`flag_offset_y`			| 2000								| Offset for flag
+||
+`image_offset_x`		| 0									| Start offset for image
+`image_offset_y`		| 0									| Start offset for image
 
 
 
