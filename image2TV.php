@@ -157,8 +157,7 @@ function build_tv( $source, $target )
 	$finalWidth 		= $GLOBALS['config']['max_width'];
 	$finalHeight 		= $GLOBALS['config']['max_height'];
 	
-	//$backgroundColor	= 'black';
-	$backgroundColor	= $GLOBALS['config']['flag_background_color'];
+	$backgroundColor	= $GLOBALS['config']['background_color'];
 	
 	$outputType			= $GLOBALS['config']['output_type'];
 	$offsetX 			= (int)($finalWidth  / 2) - (int)($newWidth  / 2);

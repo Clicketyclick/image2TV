@@ -1,39 +1,40 @@
 {
-	"@brief"				: "Image convertion to TV format"
-,	"@version"				: "2024-01-31 10:24:52"
-,	"verbose"				: 0
-,	"flag_dir"				: "flags/"
-,	"source_path"			: "./images/"
-,	"source_pattern"		: ".jpg"
-,	"target_path"			: "./TV/"
-,	"output_extention"		: "png"
-,	"output_type"			: "jpg"
-,	"flag_unknown"			: "flag-unknown"
-,	"flag_unknown"			: "Nuvola_unknown_flag"
-,	"max_height"			: 2160
-,	"max_width"				: 3840
-,	"output_file"			: "meta_iptc"
-,	"output_file_simple"	: "meta_blank"
+    "@brief"                    : "Image convertion to TV format"
+,    "@version"                 : "2024-01-31 10    :24    :52"
+,    "verbose"                  : 0
+,    "flag_dir"                 : "flags/"
+,    "source_path"              : "./images/"
+,    "source_pattern"           : ".jpg"
+,    "target_path"              : "./TV/"
+,    "output_extention"         : "png"
+,    "output_type"              : "jpg"
+,    "flag_unknown"             : "flag-unknown"
+,    "flag_unknown"             : "Nuvola_unknown_flag"
+,    "max_height"               : 2160
+,    "max_width"                : 3840
+,    "output_file"              : "meta_iptc"
+,    "output_file_simple"       : "meta_blank"
+,    "background_color"         : "black"
 
-,	"boxwidth"				: 600
+,    "boxwidth"                 : 600
 
-,	"headline_start_vpos"	: 5
-,	"headline_font_size"	: 50
-,	"headline_font_color"	: "yellow"
+,    "headline_start_vpos"      : 5
+,    "headline_font_size"       : 50
+,    "headline_font_color"      : "yellow"
 
-,	"caption_start_vpos"	: 40
-,	"caption_font_size"		: 45
-,	"caption_font_color"	: "white"
+,    "caption_start_vpos"       : 40
+,    "caption_font_size"        : 45
+,    "caption_font_color"       : "white"
 
-,	"location_start_vpos"	: 80
-,	"location_font_size"	: 30
-,	"location_font_color"	: "cyan"
+,    "location_start_vpos"      : 80
+,    "location_font_size"       : 30
+,    "location_font_color"      : "cyan"
 
-,	"flag_background_color"	: "black"
-,	"flag_offset_x"			: 3700
-,	"flag_offset_y"			: 2000
+,    "flag_background_color"    : "black"
+,    "flag_offset_x"            : 3700
+,    "flag_offset_y"            : 2000
 
-,	"image_offset_x"		: 0
-,	"image_offset_y"		: 0
+,    "image_offset_x"           : 0
+,    "image_offset_y"           : 0
 
 }
