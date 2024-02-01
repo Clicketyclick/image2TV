@@ -44,7 +44,8 @@ Meta data is:
 Tag|Default|Description
 ---|---|---
 	`@brief`				| `Image convertion to TV format`	|
-	`@version`				| `2024-01-31 10|24|52`				|
+	`@version`				| 2024-01-31 10|24|52				|
+ 
 	`verbose`				| 0									| Mute
 	`flag_dir`				| `flags/`							| Source dir for flags (xxx.png)
 	`source_path`			| `./images/`						| Source dir for images
