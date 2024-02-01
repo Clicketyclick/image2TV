@@ -1,0 +1,40 @@
+@startsalt
+skinparam defaultTextAlignment right
+
+<style>
+text {
+  HorizontalAlignment center
+}
+database {
+  HorizontalAlignment center
+}
+</style>
+
+
+{
+
+{^"Image"
+.
+.
+.
+.
+.
+.
+.
+"                            "
+}{^"Metadata"
+skinparam defaultTextAlignment right
+IPTC:Headline
+.
+.
+IPTC:Caption
+.
+.
+IPTC:Location
+<&image>
+"                           "
+}
+
+}
+
+@endsalt
