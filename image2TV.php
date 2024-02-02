@@ -16,7 +16,7 @@
  *  @copyright http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  *  @author    Erik Bachmann <ErikBachmann@ClicketyClick.dk>
  *  @since     2024-01-24T13:38:42 / erba
- *  @version   2024-02-01 12:53:40
+ *  @version   2024-02-02 15:01:59
  *  
  */
 
@@ -26,9 +26,11 @@ include_once( 'init.php' );
 // Show file desc
 $contents	= file_get_contents(__FILE__);
 $pattern	= "/\@(file|brief|version)(.*)/m"; 
+
 if(preg_match_all($pattern, $contents, $matches)){
     fprintf( STDERR, implode("\n", $matches[0]) );
 }
+
 fprintf( STDERR, "\n" );
 
 // Load config
@@ -117,11 +119,32 @@ function build_tv( $source, $target )
 	//<<<---New img size---------------------------------------------------
 
 
+
+
+	//>>>---EXIF-----------------------------------------------------------
+
+    $exif = exif_read_data($source, 'ANY_TAG', TRUE);
+    debug( "EXIF", 	var_export( $exif, TRUE ) );
+    //verbose( "EXIF", 	json_encode( $exif ?? "??" ) );
+    verbose( "EXIF", 	var_export( $exif , TRUE) );
+    verbose( "EXIF:DateTimeOriginal", 	var_export( $exif['EXIF']['DateTimeOriginal'] ?? "??", TRUE) );
+        
+    list($lat, $lng)    = getGpsCoordinates($exif) ?? [FALSE, FALSE];
+    $alt                = getGpsAltitude( $exif );
+
+    $coor               = sprintf( "%.3fx%.3f : %.2fm", $lat, $lng, $alt );
+    verbose( "EXIF: coor : alt", $coor );
+
+	//<<<---EXIF-----------------------------------------------------------
+
+
 	//>>>---Iptc-----------------------------------------------------------
 	$iptc_data = [];
 	if(isset($info['APP13']))
 	{
 		$iptc_data	= iptcparse($info['APP13']);
+        
+        debug( "IPTC_debug", 	json_encode( $iptc_data ?? "??" ) );
 		$iptc		= parseIptc( $iptc_data );
 	}
 
@@ -133,7 +156,8 @@ function build_tv( $source, $target )
 	// Set flag name
 	$flag_path	= sprintf( "%s%s.%s"
 	,	$GLOBALS['config']['flag_dir']
-	,	strtolower( $iptc['Country-PrimaryLocationCode'][0] ?? $GLOBALS['config']['flag_unknown'] )
+	//,	strtolower( $iptc['Country-PrimaryLocationCode'][0] ?? $GLOBALS['config']['flag_unknown'] )
+	,	strtoupper( $iptc['Country-PrimaryLocationCode'][0] ?? $GLOBALS['config']['flag_unknown'] )
 	,	$GLOBALS['config']['output_extention']
 	);
 
@@ -230,9 +254,11 @@ function build_tv( $source, $target )
 		,	$iptc['City'][0]						?? ""
 		,	$iptc['Province-State'][0] 				?? ""
 		,	$iptc['Country-PrimaryLocationName'][0]	?? ""
+
 		]
 	)
 	);
+    $msg    .= 0 === strcmp( '0.000x0.000 : 0.00m', $coor) ? "" : "\n\n$coor";
 
 	list($lines, $lineHeight) = wordWrapAnnotation($canvas, $draw, $msg, $boxwidth);
 	for($i = 0; $i < count($lines); $i++)
@@ -349,6 +375,16 @@ function verbose( $tag, $data )
 		fprintf( STDERR, "%-20.20s: %s\n", 	$tag, var_export( $data, TRUE ) );
 	}
 }	// verbose()
+
+//---------------------------------------------------------------------
+
+function debug( $tag, $data )
+{
+	if ( $GLOBALS['config']['debug'] ) 
+	{
+		fprintf( STDERR, "%-20.20s: %s\n", 	$tag, var_export( $data, TRUE ) );
+	}
+}	// debug()
 
 //---------------------------------------------------------------------
 

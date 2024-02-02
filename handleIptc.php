@@ -253,4 +253,69 @@ function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth)
 
 //---------------------------------------------------------------------
 
+/**
+ *  @fn         getGpsCoordinates
+ *  @brief      Extract GPS coordinates in metric from EXIF
+ *  
+ *  @param [in] $exif EXIF data structure
+ *  @return     $lat, $lng  as float
+ *  
+ *  @details    
+ *  
+ *  @example   
+ *  
+ *  @todo      
+ *  @bug       
+ *  @warning   
+ *  
+ *  @author    SaschaP https://stackoverflow.com/users/3185580/saschap
+ *  @link       https://stackoverflow.com/a/66170210
+ *  @since      2021-02-12T10:33:00 / SaschaP
+ */
+function getGpsCoordinates($exif) : array
+{
+    // check, if EXIF contains GPS-data
+    // return empty array, if no GPS-data is present
+    if(!isset($exif['GPS']) || !isset($exif['GPS']['GPSLatitude'])) return array( FALSE, FALSE  );
+
+    $info = $exif['GPS'];
+
+    $lat_degrees_fraction = explode('/', $info['GPSLatitude'][0]);
+    $lat_minutes_fraction = explode('/', $info['GPSLatitude'][1]);
+    $lat_seconds_fraction = explode('/', $info['GPSLatitude'][2]);
+    $lng_degrees_fraction = explode('/', $info['GPSLongitude'][0]);
+    $lng_minutes_fraction = explode('/', $info['GPSLongitude'][1]);
+    $lng_seconds_fraction = explode('/', $info['GPSLongitude'][2]);
+
+    $lat_degrees = floatval($lat_degrees_fraction[0]) / floatval($lat_degrees_fraction[1]);
+    $lat_minutes = floatval($lat_minutes_fraction[0]) / floatval($lat_minutes_fraction[1]);
+    $lat_seconds = floatval($lat_seconds_fraction[0]) / floatval($lat_seconds_fraction[1]);
+    $lng_degrees = floatval($lng_degrees_fraction[0]) / floatval($lng_degrees_fraction[1]);
+    $lng_minutes = floatval($lng_minutes_fraction[0]) / floatval($lng_minutes_fraction[1]);
+    $lng_seconds = floatval($lng_seconds_fraction[0]) / floatval($lng_seconds_fraction[1]);
+
+    //2024-02-02 14:12:38/ErBa: Added direction by reference
+    $lat_direction = ( 'W' == $exif['GPS']['GPSLatitudeRef'] or 'S' == $exif['GPS']['GPSLatitudeRef'] ) ? -1 : 1;
+    $lon_direction = ( 'W' == $exif['GPS']['GPSLongitudeRef'] or 'S' == $exif['GPS']['GPSLongitudeRef']) ? -1 : 1;
+
+    $lat = $lat_direction * floatval($lat_degrees+((($lat_minutes*60)+($lat_seconds))/3600));
+    $lng = $lon_direction * floatval($lng_degrees+((($lng_minutes*60)+($lng_seconds))/3600));
+
+    return array($lat, $lng);
+}
+
+function getGpsAltitude( $exif )
+{
+    if(!isset($exif['GPS']) || !isset($exif['GPS']['GPSAltitudeRef'])) return FALSE;
+    // 0 = above sea level and 1 = below sea level
+    $ref    = (bin2hex( $exif['GPS']['GPSAltitudeRef'] ) * 1) ? -1 : 1;
+    
+    $alt      = explode('/', $exif["GPS"]["GPSAltitude"]);
+    $altitude = $ref * ((isset($alt[1])) ? ($alt[0] / $alt[1]) : $alt[0]);
+    
+    return( $altitude );
+}   // getGpsAltitude()
+
+//---------------------------------------------------------------------
+
 ?>

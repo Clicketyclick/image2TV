@@ -1,15 +1,16 @@
 {
     "@brief"                    : "Image convertion to TV format"
-,    "@version"                 : "2024-01-31 10    :24    :52"
+,    "@version"                 : "2024-02-02 13:20:24"
 ,    "verbose"                  : 0
-,    "flag_dir"                 : "flags/"
+,    "debug"                    : 0
+,    "flag_dir"                 : "flags/iso3/"
 ,    "source_path"              : "./images/"
 ,    "source_pattern"           : ".jpg"
 ,    "target_path"              : "./TV/"
 ,    "output_extention"         : "png"
 ,    "output_type"              : "jpg"
 ,    "flag_unknown"             : "flag-unknown"
-,    "flag_unknown"             : "Nuvola_unknown_flag"
+,    "flag_unknown"             : "../Nuvola_unknown_flag"
 ,    "max_height"               : 2160
 ,    "max_width"                : 3840
 ,    "output_file"              : "meta_iptc"
@@ -27,7 +28,7 @@
 ,    "caption_font_color"       : "white"
 
 ,    "location_start_vpos"      : 80
-,    "location_font_size"       : 30
+,    "location_font_size"       : 40
 ,    "location_font_color"      : "cyan"
 
 ,    "flag_background_color"    : "black"
