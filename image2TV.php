@@ -16,13 +16,14 @@
  *  @copyright http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  *  @author    Erik Bachmann <ErikBachmann@ClicketyClick.dk>
  *  @since     2024-01-24T13:38:42 / erba
- *  @version   2024-02-02 15:01:59
+ *  @version   2024-02-02 15:11:21
  *  
  */
 
 include_once( 'handleIptc.php' );
 include_once( 'init.php' );
 
+$starttime  = microtime( TRUE );
 // Show file desc
 $contents	= file_get_contents(__FILE__);
 $pattern	= "/\@(file|brief|version)(.*)/m"; 
@@ -59,15 +60,24 @@ $target		= $GLOBALS['config']['target_path']		?? "../TV/";	//"\.jpg";
 // Get all images
 $files	= getFilesRecursively( $path, $pattern );
 
+$filecount  = count($files);
+$fileno     = 1;
 // Loop through all images
 foreach ( $files as $file )
 {
 	$new	= $target .  $file ;
 	mycopy( $file, $new );		// Copy source to target and create path
-	fprintf( STDERR, "- [%s] -> [%s]\n", $file, $new );
+	fprintf( STDERR, "%s/%s - [%s] -> [%s]\n"
+    ,   $fileno++ 
+    ,   $filecount
+    ,   $file
+    ,   $new 
+    );
 
 	build_tv( $file, $new );
 }
+
+fprintf( STDERR, "Duration: %.2f sec (av. %.3f sec)\n", microtime( TRUE ) - $starttime, ( microtime( TRUE ) - $starttime) / $filecount );
 
 //---------------------------------------------------------------------
 
